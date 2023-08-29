@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import {createWallet as createdWalletService} from '../services/wallet'; 
+import {createWallet as createdWalletService, getWallet as getWalletService} from '../services/wallet'; 
 import  validate  from 'uuid-validate';
 
 export const createWallet = async (req: Request, res: Response) => {
@@ -45,17 +45,26 @@ export const getWallet = async (req: Request, res: Response) => {
       if (!secret) {
         res.status(400).json({ error: 'Secret is missing' });
       }
-      //customIdentifier.length === 32
+
       if (secret.length !== 32) {
         res.status(400).send({ error: 'Please provide a valide secret ' });
       }
 
-      // const wallet = await createdWalletService(uid, secret);
-      res.status(201).send({ address:" wallet.toJSON" });
+      let statusCode  = 201
+
+      const walletDecript = await getWalletService(uid, secret);
+      // console.log(walletDecript)
+      if (walletDecript){
+        if(walletDecript.error){
+          statusCode = 400
+        }
+      }else{
+        statusCode = 400
+      }
+      res.status(statusCode).send(walletDecript);
 
     } catch (error) {
-      res.status(500).send({ error: 'Server Error' });
-
+      res.status(500).send({ error: `Server Error ${error}` });
     }
   };
   

@@ -33,16 +33,43 @@ export const createWallet = async (uid: string, secret: string) => {
 export const getWallet = async (uid: string, secret: string) => {
 
 
-  const wallet = await WalletModel.findOne({ uid });
+    const wallet = await WalletModel.findOne({ uid });
 
     if (!wallet) {
-      return null
-    }else{
-      // const encryptedWallet = wallet.encryptedWallet;
-      // const decryptedWallet = web3.eth.accounts.decrypt(encryptedWallet, secret);
-      // return decryptedWallet;
-      return wallet;
+      return {
+        "error":true,
+        "message":"Unable to find a wallet belong to your uid"
+      }
+    }
 
+    console.log(wallet)
+    const encryptedWallet = wallet.encryptedWallet;
+    // console.log(encryptedWallet)
+
+    const cryptedWallet = JSON.stringify(encryptedWallet);
+
+    let decryptWallet:any ;
+  
+    await web3.eth.accounts.decrypt(cryptedWallet, secret).then((r)=>{
+      // console.log(r)
+      decryptWallet = r
+    }).catch(
+      (r) => {
+        //
+      }
+    )
+
+    if(decryptWallet){
+      return  {
+        "error":false,
+        "message": 'Wallet decrypted ! ',
+        "data": {privateKey:decryptWallet.privateKey}
+      }
+    }else{
+      return {
+        "error" : true,
+        "message" : 'Unable to decrypt your wallet please verify the secret key '
+      }
     }
 }
 
