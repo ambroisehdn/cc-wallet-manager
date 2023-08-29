@@ -14,10 +14,10 @@ export const createWallet = async (uid: string, secret: string) => {
       "message":"You already have a wallet !"
     }
   }
-  console.log(walletExist)
+  // console.log(walletExist)
   const wallet = web3.eth.accounts.create();
   // console.log(wallet.privateKey)
-  web3.eth.accounts.encrypt(wallet.privateKey, secret).then(
+  await web3.eth.accounts.encrypt(wallet.privateKey, secret).then(
     async (ethWallet) => {
       // console.log(ethWallet)
       await WalletModel.create({ uid, encryptedWallet :ethWallet })
