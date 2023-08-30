@@ -27,3 +27,8 @@ Password : rootpassword
 ```
 
 Create a database called ``cc_wallet_db``
+
+
+### API Collection ! 
+
+Import the Postman api collection to make the api call 
