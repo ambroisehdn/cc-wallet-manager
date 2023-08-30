@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "a1f87ad6-f003-4dd2-964b-87c46e902a52",
+		"name": "CryptoCowrie",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26933079"
+	},
+	"item": [
+		{
+			"name": "cc-user-backend",
+			"item": [
+				{
+					"name": "user get wallet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/wallet?uid=5f8e3724-0a6e-4dd7-9f3a-61cc2accd4a1&secret=Z3yHWZ7LQHOhBiPmN3J4cCmCJxqFnsh7",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"wallet"
+							],
+							"query": [
+								{
+									"key": "uid",
+									"value": "5f8e3724-0a6e-4dd7-9f3a-61cc2accd4a1"
+								},
+								{
+									"key": "secret",
+									"value": "Z3yHWZ7LQHOhBiPmN3J4cCmCJxqFnsh7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user post wallet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/wallet?uid=5f8e3724-0a6e-4dd7-9f3a-61cc2accd8a5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"wallet"
+							],
+							"query": [
+								{
+									"key": "uid",
+									"value": "5f8e3724-0a6e-4dd7-9f3a-61cc2accd8a5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cc-wallet-manager",
+			"item": [
+				{
+					"name": "get wallet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/wallet?uid=5f8e3724-0a6e-4dd7-9f3a-61cc2accd4a1&secret=Z3yHWZ7LQHOhBiPmN3J4cCmCJxqFnsh7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"wallet"
+							],
+							"query": [
+								{
+									"key": "uid",
+									"value": "5f8e3724-0a6e-4dd7-9f3a-61cc2accd4a1"
+								},
+								{
+									"key": "secret",
+									"value": "Z3yHWZ7LQHOhBiPmN3J4cCmCJxqFnsh7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create wallet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uid\":\"5f8e3724-0a6e-4dd7-9f3a-61cc2accd4b3\",\n    \"secret\":\"Z3yHWZ7LQHOhBiPmN3J4cCmCJxqFnsh7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"wallet"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,9 +1,22 @@
 version: "3.8"
 
 services:
+  # app:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./docker/app/Dockerfile
+  #   container_name: cc-wallet-manager
+  #   ports:
+  #     - "8081:8081"
+  #   networks:
+  #     - walletmanager
+  #   depends_on:
+  #     - mongodb
+  #     - ethereum-geth
+
   ethereum-geth:
-    build:
-      context: .
+    build: ./docker/eth
+      # context: .
     user: "$USER:$GROUP"
     volumes:
       - ./eth:/home/doe/.ethereum
@@ -17,6 +30,8 @@ services:
       - 8546:8546
       # Network listening port (P2P networking)
       - 30303:30303
+    networks:
+      - walletmanager
     command:
       [
         # Blockchain sync mode ("snap", "full" or "light")
@@ -50,8 +65,15 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
     ports:
       - 27018:27017
+    networks:
+      - walletmanager
     volumes:
       - mongodb_data_container:/data/db
 
 volumes:
   mongodb_data_container:
+
+networks:
+  walletmanager:
+    name: walletmanager
+    driver: bridge
